@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Site\HomeController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Site\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('site.home.index');
+Route::get('/produto/{url}', [ProductController::class, 'show'])->name('site.product.show');
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
