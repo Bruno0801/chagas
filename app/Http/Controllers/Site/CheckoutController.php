@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers\Site;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class CheckoutController extends Controller
+{
+    public function orderIndex()
+    {
+        return Inertia::render('Site/Checkout/Order/Index');
+    }
+    public function orderCreate() {}
+    public function orderDelete() {}
+}
