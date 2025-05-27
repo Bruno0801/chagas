@@ -14,4 +14,9 @@ class CheckoutController extends Controller
     }
     public function orderCreate() {}
     public function orderDelete() {}
+
+    public function addressIndex()
+    {
+        return Inertia::render('Site/Checkout/Address/Index');
+    }
 }

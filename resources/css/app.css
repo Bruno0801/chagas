@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+.input-default{
+  @apply bg-transparent;
+}
+
+.input-default label{
+  @apply font-medium text-gray-800;
+}
+
+.input-default input{
+  @apply bg-gray-100 border-gray-800 rounded-md;
+}
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -12,3 +27,4 @@
   scrollbar-width: none;
   /* Firefox */
 }
+

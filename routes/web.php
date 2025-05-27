@@ -13,6 +13,7 @@ Route::get('/produto/{url}', [ProductController::class, 'show'])->name('site.pro
 Route::get('/carrinho', [CheckoutController::class, 'orderIndex'])->name('site.checkout.order.index');
 Route::get('/carrinho/adcionar/{product}', [CheckoutController::class, 'orderCreate'])->name('site.checkout.order.create');
 Route::get('/carrinho/remover/{product}', [CheckoutController::class, 'orderDelete'])->name('site.checkout.order.delete');
+Route::get('/checkout/endereco', [CheckoutController::class, 'addressIndex'])->name('site.checkout.address.index');
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
