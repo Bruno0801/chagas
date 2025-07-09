@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->decimal('discount', 10, 2)->default(0);
             $table->decimal('freight', 10, 2)->default(0);
-            $table->decimal('total', 10, 2);
+            $table->decimal('total', 10, 2)->nullable();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('address_id')->constrained()->onDelete('cascade');

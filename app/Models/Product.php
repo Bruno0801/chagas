@@ -32,4 +32,15 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
+
+    //mutators
+    public function setSizeAttribute($value)
+    {
+        return $this->attributes['size'] = json_encode($value);
+    }
+
+    public function getSizeAttribute()
+    {
+        return json_decode($this->attributes['size']);
+    }
 }

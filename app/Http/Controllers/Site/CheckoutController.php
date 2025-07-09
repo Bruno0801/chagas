@@ -19,4 +19,14 @@ class CheckoutController extends Controller
     {
         return Inertia::render('Site/Checkout/Address/Index');
     }
+
+    public function freightIndex()
+    {
+        return Inertia::render('Site/Checkout/Freight/Index');
+    }
+
+    public function paymentIndex()
+    {
+        return Inertia::render('Site/Checkout/Payment/Index');
+    }
 }

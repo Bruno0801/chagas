@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\OrderController;
 use App\Http\Controllers\Site\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -10,10 +11,14 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('site.home.index');
 Route::get('/produto/{url}', [ProductController::class, 'show'])->name('site.product.show');
-Route::get('/carrinho', [CheckoutController::class, 'orderIndex'])->name('site.checkout.order.index');
-Route::get('/carrinho/adcionar/{product}', [CheckoutController::class, 'orderCreate'])->name('site.checkout.order.create');
-Route::get('/carrinho/remover/{product}', [CheckoutController::class, 'orderDelete'])->name('site.checkout.order.delete');
+
+Route::get('/carrinho', [OrderController::class, 'index'])->name('site.checkout.order.index');
+Route::post('/carrinho/adcionar', [OrderController::class, 'store'])->name('site.checkout.order.store');
+Route::delete('/carrinho/remover/{product}', [OrderController::class, 'destroy'])->name('site.checkout.order.destroy');
+
 Route::get('/checkout/endereco', [CheckoutController::class, 'addressIndex'])->name('site.checkout.address.index');
+Route::get('/checkout/frete', [CheckoutController::class, 'freightIndex'])->name('site.checkout.freight.index');
+Route::get('/checkout/pagamento', [CheckoutController::class, 'paymentIndex'])->name('site.checkout.payment.index');
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
