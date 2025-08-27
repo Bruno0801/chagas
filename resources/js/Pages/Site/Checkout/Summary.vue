@@ -1,29 +1,45 @@
 <template>
-  <div class="shadow w-4/12 p-2 rounded-md flex flex-col gap-3 bg-white">
-    <h2 class="text-2xl font-medium">
-      Resumo
-    </h2>
+  <div class="shadow w-4/12 p-2 rounded-md flex flex-col gap-3 bg-white h-min">
+    <h2 class="text-2xl font-medium">Resumo</h2>
     <input
       class="w-full rounded-md"
       placeholder="Cupom de desconto"
       type="text"
-    >
+    />
     <div class="flex justify-between text-sm">
       <p>Produtos</p>
-      <p>R$ 1500,00</p>
+      <p>R$ {{ $page.props.auth.order.price }}</p>
     </div>
-    <div class="flex justify-between text-sm">
+    <div
+      v-if="$page.props.auth.order.discount"
+      class="flex justify-between text-sm"
+    >
       <p>Desconto</p>
-      <p>-R$ 1500,00</p>
+      <p>-R$ {{ $page.props.auth.order.discount }}</p>
     </div>
-    <div class="flex justify-between text-sm">
+    <div
+      v-if="$page.props.auth.order.freight"
+      class="flex justify-between text-sm"
+    >
       <p>Frete</p>
-      <p>R$ 10,00</p>
+      <p>R$ {{ $page.props.auth.order.freight }}</p>
     </div>
-    <div class="flex justify-between text-sm">
+    <div
+      v-if="$page.props.auth.order.total"
+      class="flex justify-between text-sm"
+    >
       <p class="font-semibold">Total</p>
-      <p>R$ 10,00</p>
+      <p>R$ {{ $page.props.auth.order.total }}</p>
     </div>
-    <button class="p-3 bg-black text-white rounded-md mt-10">Finalizar compra</button>
+    <Link
+      :href="route('site.checkout.address.index')"
+      class="p-3 bg-black text-white text-center rounded-md mt-10"
+    >
+      Continuar
+    </Link>
   </div>
 </template>
+
+<script setup>
+import { Link } from "@inertiajs/vue3";
+</script>
