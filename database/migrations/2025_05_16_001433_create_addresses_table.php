@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');               // Ex: "Casa", "Trabalho"
-            $table->string('recipient_name');    // Nome de quem vai receber
+            $table->string('name')->nullable();               // Ex: "Casa", "Trabalho"
+            $table->string('recipient_name')->nullable();    // Nome de quem vai receber
             $table->string('cep', 9);
             $table->string('street');
             $table->string('number');
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('state', 2);          // Ex: SP, RJ, etc.
             $table->decimal('freight', 10, 2)->default(0); // valor do frete pra esse endereço (opcional)
-
             $table->timestamps();
         });
     }

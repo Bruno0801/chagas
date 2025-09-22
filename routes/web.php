@@ -21,6 +21,7 @@ Route::middleware('auth')->group(
         Route::get('/checkout/endereco', [CheckoutController::class, 'addressIndex'])->name('site.checkout.address.index');
         Route::post('/checkout/endereco', [CheckoutController::class, 'addressStore'])->name('site.checkout.address.store');
         Route::get('/checkout/frete', [CheckoutController::class, 'freightIndex'])->name('site.checkout.freight.index');
+        Route::post('/checkout/frete', [CheckoutController::class, 'freightStore'])->name('site.checkout.freight.store');
         Route::get('/checkout/pagamento', [CheckoutController::class, 'paymentIndex'])->name('site.checkout.payment.index');
     }
 );
