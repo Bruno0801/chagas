@@ -23,6 +23,7 @@ Route::middleware('auth')->group(
         Route::get('/checkout/frete', [CheckoutController::class, 'freightIndex'])->name('site.checkout.freight.index');
         Route::post('/checkout/frete', [CheckoutController::class, 'freightStore'])->name('site.checkout.freight.store');
         Route::get('/checkout/pagamento', [CheckoutController::class, 'paymentIndex'])->name('site.checkout.payment.index');
+        Route::post('/checkout/pagamento', [CheckoutController::class, 'paymentStore'])->name('site.checkout.payment.store');
     }
 );
 // Route::get('/', function () {

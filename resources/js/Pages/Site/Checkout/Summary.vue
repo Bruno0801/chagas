@@ -31,12 +31,7 @@
       <p class="font-semibold">Total</p>
       <p>R$ {{ $page.props.auth.order.total }}</p>
     </div>
-    <Link
-      :href="route('site.checkout.address.index')"
-      class="p-3 bg-black text-white text-center rounded-md mt-10"
-    >
-      Continuar
-    </Link>
+    <slot> </slot>
   </div>
 </template>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -84,5 +85,11 @@ class CheckoutController extends Controller
     public function paymentIndex()
     {
         return Inertia::render('Site/Checkout/Payment/Index');
+    }
+
+    public function paymentStore(Request $request)
+    {
+        $payment = Payment::create($request->all());
+        return $request->all();
     }
 }
