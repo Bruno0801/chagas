@@ -78,7 +78,9 @@ class CheckoutController extends Controller
     }
     public function freightStore(Request $request)
     {
-        $order = Auth::user()->order()->update($request->all());
+        $user = Auth::user();
+        $total = $user->order->price + $request->freight;
+        $user->order()->update(['freight' => $request->freight, 'total' => $total]);
         return redirect()->route('site.checkout.payment.index');
     }
 
@@ -89,6 +91,41 @@ class CheckoutController extends Controller
 
     public function paymentStore(Request $request)
     {
+        $order = Auth::user()->order;
+        Auth::user()->update([
+            'document' => $request->document,
+            'phone' => $request->phone
+        ]);
+
+        $customer = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => env('ASAAS_TOKEN'),
+            'content-type' => 'application/json',
+        ])->post(env('ASAAS_URL') . '/customers', [
+            'name' => $request->name,
+            'cpfCnpj' => clear_number($request->document),
+            'email' => $request->email,
+            'mobilePhone' => clear_number($request->phone)
+        ]);
+
+        return $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => env('ASAAS_TOKEN'),
+            'content-type' => 'application/json',
+        ])->post(env('ASAAS_URL') . '/payments', [
+            'customer' =>  $customer['id'],
+            'billingType' => ['pix', 'boleto', 'credit_card'][$request->method],
+            'value' => $order->total,
+            'dueDate' => now()->format('Y-m-d'),
+            'description' => "Compra $order->id",
+            'installmentCount' => $request->method == 2 ?  $request->installment_count : 0,
+            'totalValue' => $order->total,
+            'callback' => [
+                'successUrl' => 'https://chagas.com.br/',
+                'autoRedirect' => is_cell() ? false :  true
+            ],
+        ]);
+
         $payment = Payment::create($request->all());
         return $request->all();
     }
